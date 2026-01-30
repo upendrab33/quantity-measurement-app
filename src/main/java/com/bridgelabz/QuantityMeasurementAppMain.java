@@ -1,19 +1,20 @@
 package com.bridgelabz;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class QuantityMeasurementAppMain {
 
     public static class Feet{
-        private final double value;
-        public Feet(double value)
+        private final double feetValue;
+        public Feet(double feetValue)
         {
-            this.value=value;
+            this.feetValue=feetValue;
         }
 
         public double getValue() {
-            return value;
+            return feetValue;
         }
 
         @Override
@@ -23,27 +24,33 @@ public class QuantityMeasurementAppMain {
             if(obj==null || getClass()!=obj.getClass())
                 return false;
             Feet f=(Feet) obj;
-            return Double.compare(f.value, value)==0;
+            return Double.compare(f.feetValue, feetValue)==0;
         }
 
         @Override
         public int hashCode(){
-            return Objects.hash(value);
+            return Objects.hash(feetValue);
         }
     }
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Enter first value:");
-        double feetValue1=sc.nextDouble();
-        System.out.println("Enter second value:");
-        double feetValue2=sc.nextDouble();
-        Feet f1=new Feet(feetValue1);
-        Feet f2=new Feet(feetValue2);
-        if(f1.equals(f2))
-        {
-            System.out.println("The result of equality check is:" +true);
-        }else{
-            System.out.println("The result of equality check is:" +false);
+        try{
+            Scanner sc= new Scanner(System.in);
+            System.out.println("Enter first value:");
+            double feetValue1=sc.nextDouble();
+            System.out.println("Enter second value:");
+            double feetValue2=sc.nextDouble();
+            Feet f1=new Feet(feetValue1);
+            Feet f2=new Feet(feetValue2);
+            if(f1.equals(f2))
+            {
+                System.out.println("The result of equality check is:" +true);
+            }else{
+                System.out.println("The result of equality check is:" +false);
+            }
+        }catch (Exception ex){
+            System.out.println("You entered a non-numeric, please enter numeric value");
+            System.exit(1);
         }
+
     }
 }
