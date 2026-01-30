@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class QuantityMeasurementAppMain {
@@ -24,6 +25,11 @@ public class QuantityMeasurementAppMain {
             Feet f=(Feet) obj;
             return Double.compare(f.value, value)==0;
         }
+
+        @Override
+        public int hashCode(){
+            return Objects.hash(value);
+        }
     }
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
@@ -35,9 +41,9 @@ public class QuantityMeasurementAppMain {
         Feet f2=new Feet(feetValue2);
         if(f1.equals(f2))
         {
-            System.out.println("The result of equality check:" +true);
+            System.out.println("The result of equality check is:" +true);
         }else{
-            System.out.println("The result of equality check:" +false);
+            System.out.println("The result of equality check is:" +false);
         }
     }
 }
