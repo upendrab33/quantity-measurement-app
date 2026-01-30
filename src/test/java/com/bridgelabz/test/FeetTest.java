@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class QuantityMeasurementAppTest {
+public class FeetTest {
 
     @Test
     public void testEqualitySameValue(){
