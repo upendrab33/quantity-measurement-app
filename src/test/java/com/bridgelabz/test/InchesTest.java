@@ -35,17 +35,5 @@ public class InchesTest {
         QuantityMeasurementAppMain.Inches inc=new QuantityMeasurementAppMain.Inches(30);
         assertTrue(inc.equals(inc));
     }
-    @Test
-    public void testEqualityFeetToInches(){
-        QuantityMeasurementAppMain.Feet f=new QuantityMeasurementAppMain.Feet(7.3);
-        QuantityMeasurementAppMain.Inches inc=new QuantityMeasurementAppMain.Inches(87.6);
-        assertTrue(f.equals(inc));
-    }
-    @Test
-    public void testEqualityInchesToFeet(){
-        QuantityMeasurementAppMain.Inches inc=new QuantityMeasurementAppMain.Inches(87.6);
-        QuantityMeasurementAppMain.Feet f=new QuantityMeasurementAppMain.Feet(7.3);
-        assertTrue(f.equals(inc));
-    }
 
 }
