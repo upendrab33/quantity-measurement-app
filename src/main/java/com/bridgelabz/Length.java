@@ -4,14 +4,17 @@ import java.util.Objects;
 
 public class Length {
     private final double inputValue;
-    private final LengthUnit lengthUnit;
+    private LengthUnit lengthUnit;
     public Length(double inputValue, LengthUnit lengthUnit)
     {
         this.inputValue=inputValue;
         this.lengthUnit=lengthUnit;
     }
     public enum LengthUnit{
-        FEET(1.0),INCHES(1.0/12.0);
+        FEET(1.0),
+        INCHES(1.0/12.0),
+        YARD(3.0),
+        CENTIMETER(0.393701 / 12.0);
         private final double conversionFactor;
         LengthUnit(double conversionFactor)
         {
