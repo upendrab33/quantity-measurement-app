@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Length {
     private final double inputValue;
-    private LengthUnit lengthUnit;
+    private final LengthUnit lengthUnit;
     public Length(double inputValue, LengthUnit lengthUnit)
     {
         this.inputValue=inputValue;
