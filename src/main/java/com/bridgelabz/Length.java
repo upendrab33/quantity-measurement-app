@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import java.util.Objects;
+
 public class Length {
     private final double inputValue;
     private final LengthUnit lengthUnit;
@@ -9,11 +11,11 @@ public class Length {
         this.lengthUnit=lengthUnit;
     }
     public enum LengthUnit{
-        FEET(2.1),INCHES(3);
+        FEET(1.0),INCHES(1.0/12.0);
         private final double conversionFactor;
-        LengthUnit(double baseUnit)
+        LengthUnit(double conversionFactor)
         {
-            this.conversionFactor=baseUnit;
+            this.conversionFactor=conversionFactor;
         }
         public double getConversionFactor() {
             return conversionFactor;
@@ -21,17 +23,30 @@ public class Length {
     }
 
     private double convertToBaseUnit(){
-        return 0.0;
+        return inputValue * lengthUnit.getConversionFactor();
     }
 
     public boolean compare(Length length){
-
-        return true;
+        return this.equals(length);
     }
 
     @Override
     public boolean equals(Object obj){
-
-        return true;
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass())
+        {
+            return false;
+        }
+        Length length=(Length) obj;
+        return Double.compare(this.convertToBaseUnit(), length.convertToBaseUnit()) == 0;
     }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(inputValue);
+    }
+
 }
