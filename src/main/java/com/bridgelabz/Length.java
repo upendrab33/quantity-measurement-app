@@ -23,14 +23,40 @@ public class Length {
         public double getConversionFactor() {
             return conversionFactor;
         }
+        public double fromBase(double baseValue) {
+            return baseValue / conversionFactor;
+        }
+        public double toBase(double value) {
+            return value * conversionFactor;
+        }
     }
-
     private double convertToBaseUnit(){
         return inputValue * lengthUnit.getConversionFactor();
     }
 
     public boolean compare(Length length){
         return this.equals(length);
+    }
+
+    public static double convert(double value,
+                                 LengthUnit sourceUnit,
+                                 LengthUnit targetUnit) {
+
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("Value must be finite.");
+        }
+
+        if (sourceUnit == null || targetUnit == null) {
+            throw new IllegalArgumentException("Units must not be null.");
+        }
+
+        // Convert to base (inches)
+        double baseValue = sourceUnit.toBase(value);
+
+        // Convert from base to target
+        double convertedValue = targetUnit.fromBase(baseValue);
+
+        return convertedValue;
     }
 
     @Override

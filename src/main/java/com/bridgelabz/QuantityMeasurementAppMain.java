@@ -16,12 +16,14 @@ public class QuantityMeasurementAppMain {
         Length length2=new Length(inputValue2, lengthUnit2);
         System.out.println("Length equality status: " +demonstrateLengthEquality(length1,length2));
     }
-
+    public static void demonstrateLengthConversion(Double inputValue, Length.LengthUnit lengthUnit, Length.LengthUnit toUnit){
+        System.out.println(Length.convert(inputValue,lengthUnit, toUnit));
+    }
     public static void main(String[] args) {
-        demonstrateLengthComparison(1.0, Length.LengthUnit.FEET, 12.0, Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(1.0, Length.LengthUnit.YARD, 36.0, Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(100.0, Length.LengthUnit.CENTIMETER, 39.3701, Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(3.0, Length.LengthUnit.FEET, 1.0, Length.LengthUnit.YARD);
-        demonstrateLengthComparison(30.48, Length.LengthUnit.CENTIMETER, 1.0, Length.LengthUnit.FEET);
+        demonstrateLengthConversion(1.0, Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
+        demonstrateLengthConversion(3.0, Length.LengthUnit.YARD, Length.LengthUnit.FEET);
+        demonstrateLengthConversion(36.0, Length.LengthUnit.INCHES, Length.LengthUnit.YARD);
+        demonstrateLengthConversion(1.0, Length.LengthUnit.CENTIMETER, Length.LengthUnit.INCHES);
+        demonstrateLengthConversion(0.0, Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
     }
 }
