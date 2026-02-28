@@ -20,10 +20,12 @@ public class QuantityMeasurementAppMain {
         System.out.println(Length.convert(inputValue,lengthUnit, toUnit));
     }
     public static void main(String[] args) {
-        demonstrateLengthConversion(1.0, Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
-        demonstrateLengthConversion(3.0, Length.LengthUnit.YARD, Length.LengthUnit.FEET);
-        demonstrateLengthConversion(36.0, Length.LengthUnit.INCHES, Length.LengthUnit.YARD);
-        demonstrateLengthConversion(1.0, Length.LengthUnit.CENTIMETER, Length.LengthUnit.INCHES);
-        demonstrateLengthConversion(0.0, Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
+        Length l = new Length(1, Length.LengthUnit.FEET);
+        Length l1 = new Length(12, Length.LengthUnit.INCHES);
+
+        Length result =
+                Length.add(l, l1, Length.LengthUnit.FEET);
+
+        System.out.println(result);
     }
 }
