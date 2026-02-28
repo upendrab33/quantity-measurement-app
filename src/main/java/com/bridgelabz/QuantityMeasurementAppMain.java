@@ -5,27 +5,28 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class QuantityMeasurementAppMain {
-    public static boolean demonstrateLengthEquality(Length length1, Length length2)
-    {
-        return length1.equals(length2);
-    }
-
-    public static void demonstrateLengthComparison(Double inputValue1, LengthUnit lengthUnit1, Double inputValue2, LengthUnit lengthUnit2){
-
-        Length length1=new Length(inputValue1, lengthUnit1);
-        Length length2=new Length(inputValue2, lengthUnit2);
-        System.out.println("Length equality status: " +demonstrateLengthEquality(length1,length2));
-    }
-    public static void demonstrateLengthConversion(Double inputValue, LengthUnit lengthUnit, LengthUnit toUnit){
-        System.out.println(Length.convert(inputValue,lengthUnit, toUnit));
-    }
     public static void main(String[] args) {
-        Length l = new Length(1, LengthUnit.FEET);
-        Length l1 = new Length(12, LengthUnit.INCHES);
+        Weight w1 = new Weight(1.0, WeightUnit.KILOGRAM);
+        Weight w2 = new Weight(1.0, WeightUnit.KILOGRAM);
+        System.out.println(w1.equals(w2));
 
-        Length result =
-                Length.add(l, l1, LengthUnit.FEET);
+        Weight w3 = new Weight(1.0, WeightUnit.KILOGRAM);
+        System.out.println(w3.convertTo(WeightUnit.GRAM));
 
+        Weight w4 = new Weight(1.0, WeightUnit.KILOGRAM);
+        Weight w5 = new Weight(2.0, WeightUnit.KILOGRAM);
+        System.out.println(w4.add(w5));
+
+        Weight w6 = new Weight(1.0, WeightUnit.KILOGRAM);
+        Weight w7 = new Weight(1000.0, WeightUnit.GRAM);
+        Weight result =
+                Weight.add(w6, w7, WeightUnit.GRAM);
         System.out.println(result);
+
+        Weight w = new Weight(1.0, WeightUnit.KILOGRAM);
+        Length l = new Length(1.0, LengthUnit.FEET);
+        boolean result1 = w.equals(l);
+        System.out.println(result1);
+
     }
 }
