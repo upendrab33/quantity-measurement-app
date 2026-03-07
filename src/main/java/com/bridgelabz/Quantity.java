@@ -62,6 +62,44 @@ public class Quantity <U extends IMeasurable>{
         return new Quantity<>(result, targetUnit);
     }
 
+    public Quantity<U> subtract(Quantity<U> other) {
+        return subtract(other, this.unit);
+    }
+
+    public Quantity<U> subtract(Quantity<U> other, U targetUnit) {
+        if (other == null) throw new IllegalArgumentException("Other quantity cannot be null");
+        if (targetUnit == null) throw new IllegalArgumentException("Target unit cannot be null");
+        if (!unit.getClass().equals(other.unit.getClass())) {
+            throw new IllegalArgumentException("Cannot subtract quantities of different categories");
+        }
+
+        double baseValueThis = unit.convertToBaseUnit(this.value);
+        double baseValueOther = other.unit.convertToBaseUnit(other.value);
+        double resultBase = baseValueThis - baseValueOther;
+        double resultValue = targetUnit.convertFromBaseUnit(resultBase);
+
+        return new Quantity<>(round(resultValue), targetUnit);
+    }
+
+    public double divide(Quantity<U> other) {
+        if (other == null) throw new IllegalArgumentException("Other quantity cannot be null");
+        if (!unit.getClass().equals(other.unit.getClass())) {
+            throw new IllegalArgumentException("Cannot divide quantities of different categories");
+        }
+
+        double baseValueThis = unit.convertToBaseUnit(this.value);
+        double baseValueOther = other.unit.convertToBaseUnit(other.value);
+
+        if (Math.abs(baseValueOther) < EPSILON) {
+            throw new ArithmeticException("Division by zero quantity");
+        }
+
+        return baseValueThis / baseValueOther;
+    }
+
+    private double round(double val) {
+        return Math.round(val * 100.0) / 100.0;
+    }
 
     @Override
     public boolean equals(Object obj) {
