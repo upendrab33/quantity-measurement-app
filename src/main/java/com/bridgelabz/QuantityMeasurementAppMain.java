@@ -31,17 +31,26 @@ public class QuantityMeasurementAppMain {
 
     public static void main(String[] args) {
 
-        Quantity<VolumeUnit> v1 = new Quantity<>(5.0, VolumeUnit.LITRE);
-        Quantity<VolumeUnit> v2 = new Quantity<>(500.0, VolumeUnit.MILLILITRE);
+        System.out.println("\n=== Temperature Demonstration ===");
 
-        Quantity<VolumeUnit> diff1 = demonstrateSubtraction(v1, v2);
-        System.out.println(diff1);
+        // Equality Demonstration
+        Quantity<TemperatureUnit> temp1 = new Quantity<>(0.0, TemperatureUnit.CELSIUS);
+        Quantity<TemperatureUnit> temp2 = new Quantity<>(32.0, TemperatureUnit.FAHRENHEIT);
 
-        Quantity<VolumeUnit> diff2 = demonstrateSubtraction(v1, v2, VolumeUnit.MILLILITRE);
-        System.out.println(diff2);
+        System.out.println("0°C equals 32°F: " + temp1.equals(temp2));
 
-        double ratio =demonstrateDivision(v1, v2);
-        System.out.println(ratio);
+        // Conversion Demonstration
+        Quantity<TemperatureUnit> celsius = new Quantity<>(100.0, TemperatureUnit.CELSIUS);
+        Quantity<TemperatureUnit> fahrenheit = celsius.convertTo(TemperatureUnit.FAHRENHEIT);
+
+        System.out.println("100°C = " + fahrenheit.getValue() + "°F");
+
+        // Unsupported Operation Demonstration
+        try {
+            celsius.add(new Quantity<>(50.0, TemperatureUnit.CELSIUS));
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Cannot add absolute temperatures: " + e.getMessage());
+        }
 
     }
 }

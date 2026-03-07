@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 public interface IMeasurable {
+    SupportsArithmetic supportsArithmetic = () -> true;
     double getConversionFactor();
 
     default double convertToBaseUnit(double value) {
@@ -12,4 +13,10 @@ public interface IMeasurable {
     }
 
     String getUnitName();
+    default boolean supportsArithmetic() {
+        return supportsArithmetic.isSupported();
+    }
+
+    default void validateOperationSupport(String operation) {
+    }
 }

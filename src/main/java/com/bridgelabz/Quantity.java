@@ -42,7 +42,11 @@ public class Quantity <U extends IMeasurable>{
 
 
     public Quantity<U> add(Quantity<U> other) {
-        return add(other, this.unit);
+        this.unit.validateOperationSupport("add");
+        other.unit.validateOperationSupport("add");
+        double resultBase = performBaseArithmetic(other, ArithmeticOperation.ADD);
+        //return new Quantity<>(unit.convertFromBaseUnit(resultBase), unit);
+        return new Quantity<>(unit.convertFromBaseUnit(resultBase),unit);
     }
 
     public Quantity<U> add(Quantity<U> other, U targetUnit) {
