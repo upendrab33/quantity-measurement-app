@@ -5,28 +5,65 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class QuantityMeasurementAppMain {
+
+    public static <U extends IMeasurable> boolean demonstrateEquality(
+            Quantity<U> quantity1, Quantity<U> quantity2) {
+
+        return quantity1.equals(quantity2);
+    }
+    public static <U extends IMeasurable> Quantity<U> demonstrateConversion(
+            Quantity<U> quantity, U targetUnit) {
+
+        return quantity.convertTo(targetUnit);
+    }
+    public static <U extends IMeasurable> Quantity<U> demonstrateAddition(
+            Quantity<U> quantity1, Quantity<U> quantity2) {
+
+        return quantity1.add(quantity2);
+    }
+    public static <U extends IMeasurable> Quantity<U> demonstrateAddition(
+            Quantity<U> quantity1, Quantity<U> quantity2, U targetUnit) {
+
+        return quantity1.add(quantity2, targetUnit);
+    }
     public static void main(String[] args) {
-        Weight w1 = new Weight(1.0, WeightUnit.KILOGRAM);
-        Weight w2 = new Weight(1.0, WeightUnit.KILOGRAM);
-        System.out.println(w1.equals(w2));
 
-        Weight w3 = new Weight(1.0, WeightUnit.KILOGRAM);
-        System.out.println(w3.convertTo(WeightUnit.GRAM));
+        Quantity<WeightUnit> weightInGrams =
+                new Quantity<>(1000.0, WeightUnit.GRAM);
 
-        Weight w4 = new Weight(1.0, WeightUnit.KILOGRAM);
-        Weight w5 = new Weight(2.0, WeightUnit.KILOGRAM);
-        System.out.println(w4.add(w5));
+        Quantity<WeightUnit> weightInKilograms =
+                new Quantity<>(1.0, WeightUnit.KILOGRAM);
 
-        Weight w6 = new Weight(1.0, WeightUnit.KILOGRAM);
-        Weight w7 = new Weight(1000.0, WeightUnit.GRAM);
-        Weight result =
-                Weight.add(w6, w7, WeightUnit.GRAM);
-        System.out.println(result);
+        boolean areEqual =
+                demonstrateEquality(weightInGrams, weightInKilograms);
 
-        Weight w = new Weight(1.0, WeightUnit.KILOGRAM);
-        Length l = new Length(1.0, LengthUnit.FEET);
-        boolean result1 = w.equals(l);
-        System.out.println(result1);
+        System.out.println("Are weights equal? " + areEqual);
+
+        Quantity<WeightUnit> convertedWeight =
+                demonstrateConversion(weightInGrams, WeightUnit.KILOGRAM);
+
+        System.out.println("Converted Weight: "
+                + convertedWeight.getValue() + " "
+                + convertedWeight.getUnit());
+
+        Quantity<WeightUnit> weightInPounds =
+                new Quantity<>(2.20462, WeightUnit.POUND);
+
+        Quantity<WeightUnit> sumWeight =
+                demonstrateAddition(weightInKilograms, weightInPounds);
+
+        System.out.println("Sum Weight: "
+                + sumWeight.getValue() + " "
+                + sumWeight.getUnit());
+
+        Quantity<WeightUnit> sumWeightInGrams =
+                demonstrateAddition(weightInKilograms,
+                        weightInPounds,
+                        WeightUnit.GRAM);
+
+        System.out.println("Sum Weight in Grams: "
+                + sumWeightInGrams.getValue() + " "
+                + sumWeightInGrams.getUnit());
 
     }
 }

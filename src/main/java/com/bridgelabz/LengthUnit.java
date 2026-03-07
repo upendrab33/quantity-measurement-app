@@ -15,6 +15,15 @@ public enum LengthUnit implements IMeasurable {
     public double getConversionFactor() {
         return conversionFactor;
     }
+    @Override
+    public double convertToBaseUnit(double value) {
+        return value * conversionFactor;
+    }
+
+    @Override
+    public double convertFromBaseUnit(double baseValue) {
+        return baseValue / conversionFactor;
+    }
 
     @Override
     public String getUnitName() {
